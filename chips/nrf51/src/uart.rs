@@ -2,7 +2,7 @@ use core::cell::Cell;
 use kernel::common::take_cell::TakeCell;
 use kernel::common::VolatileCell;
 use kernel::hil::uart;
-use nrf5x::pinmux::Pinmux;
+use nrf5x::pinmux::{Pinmux, NO_PIN};
 
 pub static mut UART0: UART = UART::new();
 const UART_BASE: u32 = 0x40002000;
@@ -86,6 +86,14 @@ impl UART {
         regs.pselrxd.set(rx);
         regs.pselcts.set(cts);
         regs.pselrts.set(rts);
+    }
+
+    pub fn configure_no_flow(&self, tx: Pinmux, rx: Pinmux) {
+        let regs = unsafe { &*self.regs };
+        regs.pseltxd.set(tx);
+        regs.pselrxd.set(rx);
+        regs.pselcts.set(NO_PIN);
+        regs.pselrts.set(NO_PIN);
     }
 
     fn set_baud_rate(&self, baud_rate: u32) {

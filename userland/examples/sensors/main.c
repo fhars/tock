@@ -33,6 +33,9 @@ static void timer_fired(__attribute__ ((unused)) int arg0,
   unsigned humi = 0;
   int ninedof_x = 0, ninedof_y = 0, ninedof_z = 0;
 
+  static int ctr = 0;
+  printf("Iteration                  : %d\n", ++ctr);
+
   /* *INDENT-OFF* */
   if (isl29035)     ambient_light_read_intensity_sync(&light);
   if (tmp006)       tmp006_read_sync(&tmp006_temp);

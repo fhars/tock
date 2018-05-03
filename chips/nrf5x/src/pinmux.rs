@@ -14,6 +14,8 @@ static mut USED_PINS: VolatileCell<u32> = VolatileCell::new(0);
 #[derive(Copy, Clone)]
 pub struct Pinmux(u32);
 
+pub static NO_PIN: Pinmux = Pinmux(0xFFFFFFFF);
+
 impl Pinmux {
     /// Creates a new `Pinmux` wrapping the numbered pin.
     ///
