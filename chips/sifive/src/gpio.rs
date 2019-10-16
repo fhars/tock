@@ -139,6 +139,11 @@ impl GpioPin {
             client.fired();
         });
     }
+
+    fn disable_input(&self) {
+        let regs = self.registers;
+        regs.input_en.modify(self.clear);
+    }
 }
 
 impl hil::gpio::Configure for GpioPin {
@@ -213,12 +218,6 @@ impl hil::gpio::Configure for GpioPin {
         regs.input_en.modify(self.set);
         regs.iof_en.modify(self.clear);
 
-        self.configuration()
-    }
-
-    fn disable_input(&self) -> hil::gpio::Configuration {
-        let regs = self.registers;
-        regs.input_en.modify(self.clear);
         self.configuration()
     }
 }

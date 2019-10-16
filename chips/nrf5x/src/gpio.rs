@@ -393,10 +393,6 @@ impl hil::gpio::Configure for GPIOPin {
         hil::gpio::Configuration::Input
     }
 
-    fn disable_input(&self) -> hil::gpio::Configuration {
-        self.make_output()
-    }
-
     fn configuration(&self) -> hil::gpio::Configuration {
         let gpio_regs = &*self.gpio_registers;
         if gpio_regs.dirclr.get() & 1 << self.pin == 0 {

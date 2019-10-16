@@ -319,13 +319,6 @@ impl gpio::Configure for GPIOPin {
         pin_ioc.is_set(ioc::Config::INPUT_EN)
     }
 
-    fn disable_input(&self) -> gpio::Configuration {
-        // GPIOs are either inputs or outputs on this chip.
-        // To "disable" input would cause this pin to start driving, which is
-        // likely undesired, so this function is a no-op.
-        self.configuration()
-    }
-
     fn is_output(&self) -> bool {
         let pin_ioc = &self.ioc_registers.cfg[self.pin];
         !pin_ioc.is_set(ioc::Config::INPUT_EN)

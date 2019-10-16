@@ -1034,11 +1034,6 @@ impl hil::gpio::Configure for Pin<'a> {
         hil::gpio::Configuration::LowPower
     }
 
-    fn disable_input(&self) -> hil::gpio::Configuration {
-        self.set_mode(Mode::AnalogMode);
-        hil::gpio::Configuration::LowPower
-    }
-
     fn set_floating_state(&self, mode: hil::gpio::FloatingState) {
         match mode {
             hil::gpio::FloatingState::PullUp => self.set_pullup_pulldown(PullUpPullDown::PullUp),

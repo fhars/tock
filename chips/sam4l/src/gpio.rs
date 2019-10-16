@@ -518,10 +518,6 @@ impl gpio::Configure for GPIOPin {
         self.configuration()
     }
 
-    fn disable_input(&self) -> gpio::Configuration {
-        self.configuration()
-    }
-
     fn is_input(&self) -> bool {
         let port: &GpioRegisters = &*self.port;
         port.gper.val.get() & self.pin_mask != 0

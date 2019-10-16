@@ -67,8 +67,6 @@ pub trait Configure {
     /// which should be ither `Configuration::Input` or
     /// `Configuration::InputOutput`.
     fn make_input(&self) -> Configuration;
-    /// Disable the pin as an input, returning the current configuration.
-    fn disable_input(&self) -> Configuration;
 
     /// Put a pin into its lowest power state, with no guarantees on
     /// if it is enabled or not. Implementations are free to use any
@@ -278,10 +276,6 @@ impl Configure for InterruptValueWrapper {
 
     fn make_input(&self) -> Configuration {
         self.source.make_input()
-    }
-
-    fn disable_input(&self) -> Configuration {
-        self.source.disable_input()
     }
 
     fn deactivate_to_low_power(&self) {
